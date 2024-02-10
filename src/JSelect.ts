@@ -7,7 +7,7 @@ class JSelect {
     private readonly HTML_SELECT_CLASS: string = 'HTMLSelectElement';
 
     constructor(element: HTMLElement, options: IJSelectOptions = JSelectConfig.getDefaultOptions()) {
-        if (element.constructor.name !== this.HTML_SELECT_CLASS) return;
+        if (element.constructor.name !== this.HTML_SELECT_CLASS) throw new Error('JSelect can only be instantiated on a HTML select element.');
 
         this.element = <HTMLSelectElement> element;
         this.selectionOptions = this.element.querySelectorAll('option');
