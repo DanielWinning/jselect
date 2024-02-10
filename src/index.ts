@@ -1,1 +1,1 @@
-console.log('Hello, JSelect');
+export { JSelect } from './JSelect';
