@@ -1,4 +1,7 @@
+declare interface IJSelectOptions {
+
+}
 declare class JSelect {
-    constructor(element: HTMLElement);
+    constructor(element: HTMLElement, options: IJSelectOptions = {});
 }
 export { JSelect };

@@ -1,0 +1,6 @@
+interface IJSelectOptions
+{
+
+}
+
+export { IJSelectOptions };
