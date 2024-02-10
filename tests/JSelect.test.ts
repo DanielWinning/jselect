@@ -16,13 +16,13 @@ describe('Class: JSelect', () => {
             element.append(option);
         }
 
-        const jSelect = new JSelect(element);
+        const jSelect: JSelect = new JSelect(element);
 
         expect(jSelect).toBeInstanceOf(JSelect);
     });
 
     it('should throw error when instantiated with incorrect element type', (): void => {
-        expect(() => {
+        expect((): void => {
             const element: HTMLDivElement = document.createElement('div');
 
             new JSelect(element);
