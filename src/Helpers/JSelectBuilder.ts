@@ -15,11 +15,6 @@ class JSelectBuilder
             if (el.constructor.name === 'HTMLSelectElement') new JSelect(el);
         });
     }
-
-    public static instantiateSelectsFromList()
-    {
-
-    }
 }
 
 export { JSelectBuilder };
