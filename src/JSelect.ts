@@ -1,11 +1,10 @@
 import { IJSelectOptions } from './Interface/IJSelectOptions';
 import { JSelectConfig } from './Config/JSelectConfig';
 import { JSelectBuilder } from './Helpers/JSelectBuilder';
-import {ElementSelect} from "./Elements/ElementSelect";
-import {JSelectElement} from "./Elements/JSelectElement";
+import { ElementSelect } from './Elements/ElementSelect';
 
 class JSelect {
-    private selector: JSelectElement;
+    private selector: ElementSelect;
     private htmlSelectElement: HTMLSelectElement;
     private readonly HTML_SELECT_CLASS: string = 'HTMLSelectElement';
     private selectContainer: ElementSelect;
@@ -16,7 +15,8 @@ class JSelect {
 
         this.setOriginalSelectData(<HTMLSelectElement> element);
         this.settings = JSelectConfig.getAllOptions(settings);
-        this.setupElementTree();
+        this.selector = new ElementSelect(this.htmlSelectElement);
+        this.selector.render(this.htmlSelectElement);
     }
 
     /**
@@ -28,11 +28,6 @@ class JSelect {
     {
         this.htmlSelectElement = element;
         this.htmlSelectElement.style.display = 'none';
-    }
-
-    private setupElementTree()
-    {
-        this.selector = new ElementSelect(this.htmlSelectElement);
     }
 
     /**

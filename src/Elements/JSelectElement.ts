@@ -34,6 +34,39 @@ abstract class JSelectElement
             throw new Error(`Invalid element type. Expected ${element.name}, got ${this.originalElement.constructor.name}.`);
         }
     }
+
+    /**
+     * @returns {void}
+     */
+    protected prepareForRender(): void
+    {
+        if (this.subElements.length) {
+            this.subElements.forEach((subElement: JSelectElement): void => {
+                this.jselectElement.append(subElement.getDOMElement());
+            });
+        }
+    }
+
+    /**
+     * @param {HTMLElement} element
+     * @param {InsertPosition} where
+     *
+     * @returns {void}
+     */
+    public render(element: HTMLElement, where: InsertPosition = 'beforebegin'): void
+    {
+        this.prepareForRender();
+
+        element.insertAdjacentElement(where, this.jselectElement);
+    }
+
+    /**
+     * @returns {HTMLDivElement}
+     */
+    public getDOMElement(): HTMLDivElement
+    {
+        return this.jselectElement;
+    }
 }
 
 export { JSelectElement };
