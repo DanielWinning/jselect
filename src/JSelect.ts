@@ -24,14 +24,18 @@ class JSelect {
      */
     private renderHTML(): void
     {
-        const selectContainer: HTMLDivElement = document.createElement('div');
+        const selectContainer: HTMLDivElement = document.createElement('div'),
+            selectedContainer: HTMLDivElement = document.createElement('div');
 
         selectContainer.classList.add('jselect-container');
-        selectContainer.append(this.createOptionsElements());
+        selectContainer.append(selectedContainer, this.createOptionsElements());
 
         this.element.insertAdjacentElement('beforebegin', selectContainer);
     }
 
+    /**
+     * @returns {HTMLDivElement}
+     */
     private createOptionsElements(): HTMLDivElement
     {
         const optionsContainer: HTMLDivElement = document.createElement('div');
