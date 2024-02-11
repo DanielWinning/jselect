@@ -1,5 +1,5 @@
 import { JSelectElement } from './JSelectElement';
-import {ElementOption} from "./ElementOption";
+import { ElementOption } from './ElementOption';
 
 class ElementOptionGroup extends JSelectElement
 {
@@ -11,8 +11,12 @@ class ElementOptionGroup extends JSelectElement
         this.checkElementType(HTMLOptGroupElement);
 
         const jselectOptionGroupElement: HTMLDivElement = document.createElement('div');
+        const labelSpan: HTMLSpanElement = document.createElement('span');
 
         jselectOptionGroupElement.classList.add('jselect-optgroup');
+        labelSpan.classList.add('jselect-optgroup-label');
+        labelSpan.innerHTML = (this.originalElement as HTMLOptGroupElement).label;
+        jselectOptionGroupElement.append(labelSpan);
 
         return jselectOptionGroupElement;
     }
