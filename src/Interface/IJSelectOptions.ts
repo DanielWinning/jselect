@@ -1,8 +1,8 @@
 interface IJSelectOptions
 {
     search?: boolean;
-    selected?: string;
-    placeholder?: string;
+    selected?: string|null;
+    placeholder?: string|null;
     multiple?: boolean;
 }
 

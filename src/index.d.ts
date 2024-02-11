@@ -1,11 +1,11 @@
 declare interface IJSelectOptions {
     search?: boolean;
-    selected?: string;
-    placeholder?: string;
+    selected?: string|null;
+    placeholder?: string|null;
     multiple?: boolean;
 }
 declare class JSelect {
     constructor(element: HTMLElement, options: IJSelectOptions = {});
     public static loadAllWithDefaultOptions(): void;
 }
-export { JSelect };
+export { JSelect, IJSelectOptions };

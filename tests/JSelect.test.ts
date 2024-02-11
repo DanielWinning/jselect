@@ -7,7 +7,7 @@ afterEach((): void => {
     document.body.innerHTML = '';
 });
 
-describe('Class: JSelect', () => {
+describe('Class: JSelect', (): void => {
     it('should create an instance of JSelect', (): void => {
         const element: HTMLSelectElement = document.createElement('select');
 
