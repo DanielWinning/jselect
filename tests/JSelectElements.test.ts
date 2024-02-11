@@ -3,7 +3,8 @@
  */
 import { ElementOption } from '../src/Elements/ElementOption';
 import { ElementOptionGroup } from '../src/Elements/ElementOptionGroup';
-import {ElementSelect} from "../src/Elements/ElementSelect";
+import { ElementSelect } from '../src/Elements/ElementSelect';
+import {ElementSearch} from "../src/Elements/ElementSearch";
 
 interface JSelectTestOption {
     group: number;

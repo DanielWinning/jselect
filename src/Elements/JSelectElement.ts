@@ -8,9 +8,9 @@ abstract class JSelectElement
         this.originalElement = element;
         this.jselectElement = this.buildElement();
 
-        if (this.buildSubElements instanceof Function) {
-            this.buildSubElements();
-        }
+        if (this.runAfterBuild instanceof Function) this.runAfterBuild();
+
+        if (this.buildSubElements instanceof Function) this.buildSubElements();
     }
 
     /**
@@ -22,6 +22,11 @@ abstract class JSelectElement
      * @returns {void}
      */
     protected buildSubElements?(): void;
+
+    /**
+     * @returns {void}
+     */
+    protected runAfterBuild?(): void;
 
     /**
      * @param {Function} element

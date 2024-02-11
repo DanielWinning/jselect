@@ -33,8 +33,10 @@ const testRender = (withOptGroup: boolean = false) => {
     const jselectContainer: HTMLElement = document.querySelector('.jselect-container');
     const jselectOptionGroup: HTMLElement = document.querySelector('.jselect-optgroup');
     const jselectOption: HTMLElement = document.querySelector('.jselect-option');
+    const jselectSearch: HTMLElement = document.querySelector('.jselect-search-input');
 
     expect(jselectContainer).toBeTruthy();
+    expect(jselectSearch).toBeTruthy();
 
     if (withOptGroup) {
         expect(jselectOptionGroup).toBeTruthy();
@@ -45,7 +47,6 @@ const testRender = (withOptGroup: boolean = false) => {
     expect(jselectContainer.dataset.jselectName).toBe('test');
     expect(jselectOption.dataset.jselectValue).toBe('1');
     expect(jselectOption.innerHTML).toBe('Option One');
-
 }
 
 afterEach((): void => {

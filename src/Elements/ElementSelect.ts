@@ -1,6 +1,7 @@
 import { JSelectElement } from './JSelectElement';
 import { ElementOptionGroup } from './ElementOptionGroup';
 import { ElementOption } from './ElementOption';
+import {ElementSearch} from "./ElementSearch";
 
 class ElementSelect extends JSelectElement
 {
@@ -17,6 +18,14 @@ class ElementSelect extends JSelectElement
         jselectSelectElement.dataset.jselectName = (this.originalElement as HTMLSelectElement).name;
 
         return jselectSelectElement;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected runAfterBuild(): void
+    {
+        this.addSubElement(new ElementSearch());
     }
 
     /**
