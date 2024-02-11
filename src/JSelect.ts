@@ -1,6 +1,6 @@
 import { IJSelectOptions } from './Interface/IJSelectOptions';
 import { JSelectConfig } from './Config/JSelectConfig';
-import {JSelectBuilder} from "./Helpers/JSelectBuilder";
+import { JSelectBuilder } from './Helpers/JSelectBuilder';
 
 class JSelect {
     private element: HTMLSelectElement;
@@ -41,7 +41,7 @@ class JSelect {
     }
 
     /**
-     * @returns void
+     * @returns {void}
      */
     public static loadAllWithDefaultOptions(): void
     {
