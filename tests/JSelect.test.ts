@@ -3,6 +3,10 @@
 */
 import { JSelect } from '../src/JSelect';
 
+afterEach((): void => {
+    document.body.innerHTML = '';
+});
+
 describe('Class: JSelect', () => {
     it('should create an instance of JSelect', (): void => {
         const element: HTMLSelectElement = document.createElement('select');
@@ -39,5 +43,13 @@ describe('Class: JSelect', () => {
         expect((): void => {
             JSelect.loadAllWithDefaultOptions();
         }).not.toThrow();
+    });
+
+    it('should instantiate when provided empty options', (): void => {
+        const select: HTMLSelectElement = document.createElement('select');
+
+        expect((): void => {
+           new JSelect(select, {});
+       }).not.toThrow();
     });
 });

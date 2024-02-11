@@ -33,7 +33,10 @@ class JSelectConfig
                 : defaultOptions.selected,
             placeholder: options.placeholder !== undefined
                 ? options.placeholder
-                : defaultOptions.placeholder
+                : defaultOptions.placeholder,
+            multiple: options.multiple !== undefined
+                ? options.multiple
+                : defaultOptions.multiple
         }
     }
 }

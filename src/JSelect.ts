@@ -6,6 +6,7 @@ class JSelect {
     private element: HTMLSelectElement;
     private selectionOptions: NodeListOf<HTMLOptionElement>;
     private readonly HTML_SELECT_CLASS: string = 'HTMLSelectElement';
+    private selectOptions: IJSelectOptions;
 
     constructor(element: HTMLElement, options: IJSelectOptions = JSelectConfig.getDefaultOptions()) {
         if (element.constructor.name !== this.HTML_SELECT_CLASS) throw new Error('JSelect can only be instantiated on a HTML select element.');
@@ -13,31 +14,51 @@ class JSelect {
         this.element = <HTMLSelectElement> element;
         this.element.style.display = 'none';
         this.selectionOptions = this.element.querySelectorAll('option');
+        this.selectOptions = JSelectConfig.getAllOptions(options);
 
-        this.setup(options);
+        this.renderHTML();
     }
 
     /**
-     * @param {IJSelectOptions} options
-     *
      * @returns {void}
      */
-    private setup(options: IJSelectOptions): void
+    private renderHTML(): void
     {
         const selectContainer: HTMLDivElement = document.createElement('div');
 
         selectContainer.classList.add('jselect-container');
-
-        this.selectionOptions.forEach((selectionOption: HTMLOptionElement) => {
-            const selection: HTMLDivElement = document.createElement('div');
-
-            selection.dataset.jselectValue = selectionOption.value;
-            selection.innerHTML = selectionOption.innerHTML;
-
-            selectContainer.append(selection);
-        });
+        selectContainer.append(this.createOptionsElements());
 
         this.element.insertAdjacentElement('beforebegin', selectContainer);
+    }
+
+    private createOptionsElements(): HTMLDivElement
+    {
+        const optionsContainer: HTMLDivElement = document.createElement('div');
+
+        optionsContainer.classList.add('jselect-options');
+
+        this.selectionOptions.forEach((selectionOption: HTMLOptionElement): void => {
+            optionsContainer.append(this.buildOptionElement(selectionOption));
+        });
+
+        return optionsContainer;
+    }
+
+    /**
+     * @param {HTMLOptionElement} element
+     *
+     * @returns {HTMLDivElement}
+     */
+    private buildOptionElement(element: HTMLOptionElement): HTMLDivElement
+    {
+        const selection: HTMLDivElement = document.createElement('div');
+
+        selection.dataset.jselectValue = element.value;
+        selection.innerHTML = element.innerHTML;
+        selection.classList.add('jselect-option');
+
+        return selection;
     }
 
     /**
