@@ -1,14 +1,12 @@
 abstract class JSelectElement
 {
     protected originalElement: HTMLElement|null = null;
-    protected jselectElement: HTMLDivElement;
+    protected jselectElement: HTMLElement;
     protected subElements: Array<JSelectElement> = [];
 
     constructor(element: HTMLElement = null) {
         this.originalElement = element;
         this.jselectElement = this.buildElement();
-
-        if (this.runAfterBuild instanceof Function) this.runAfterBuild();
 
         if (this.buildSubElements instanceof Function) this.buildSubElements();
     }
@@ -16,17 +14,21 @@ abstract class JSelectElement
     /**
      * @returns {void}
      */
-    protected abstract buildElement(): HTMLDivElement;
+    protected abstract buildElement(): HTMLElement;
 
     /**
      * @returns {void}
      */
     protected buildSubElements?(): void;
 
-    /**
-     * @returns {void}
-     */
-    protected runAfterBuild?(): void;
+    protected makeElement(elementTag: string, cssClasses: string): HTMLElement
+    {
+        const element: HTMLElement = document.createElement(elementTag);
+
+        element.classList.add(cssClasses);
+
+        return element;
+    }
 
     /**
      * @param {Function} element
@@ -49,7 +51,7 @@ abstract class JSelectElement
      *
      * @returns {void}
      */
-    protected addSubElement(subElement: JSelectElement): void
+    public addSubElement(subElement: JSelectElement): void
     {
         this.subElements.push(subElement);
         this.jselectElement.append(subElement.getDOMElement());
@@ -67,9 +69,9 @@ abstract class JSelectElement
     }
 
     /**
-     * @returns {HTMLDivElement}
+     * @returns {HTMLElement}
      */
-    public getDOMElement(): HTMLDivElement
+    public getDOMElement(): HTMLElement
     {
         return this.jselectElement;
     }

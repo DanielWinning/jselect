@@ -2,11 +2,12 @@ import { JSelectElement } from './JSelectElement';
 
 class ElementSearch extends JSelectElement
 {
-    protected buildElement(): HTMLDivElement {
-        const jselectSearchElement: HTMLInputElement = document.createElement('input');
+    protected buildElement(): HTMLInputElement
+    {
+        const jselectSearchElement: HTMLInputElement =
+            <HTMLInputElement> this.makeElement('input', 'jselect-search-input');
 
         jselectSearchElement.type = 'text';
-        jselectSearchElement.classList.add('jselect-search-input');
 
         return jselectSearchElement;
     }

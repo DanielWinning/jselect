@@ -1,7 +1,9 @@
 import { JSelectElement } from './JSelectElement';
 import { ElementOptionGroup } from './ElementOptionGroup';
 import { ElementOption } from './ElementOption';
-import {ElementSearch} from "./ElementSearch";
+import { ElementSearch } from './ElementSearch';
+import { ElementOptionsContainer } from './ElementOptionsContainer';
+import {ElementInputContainer} from "./ElementInputContainer";
 
 class ElementSelect extends JSelectElement
 {
@@ -23,22 +25,21 @@ class ElementSelect extends JSelectElement
     /**
      * @inheritDoc
      */
-    protected runAfterBuild(): void
-    {
-        this.addSubElement(new ElementSearch());
-    }
-
-    /**
-     * @inheritDoc
-     */
     protected buildSubElements(): void
     {
+        const optionsContainer: ElementOptionsContainer = new ElementOptionsContainer(),
+            inputContainer: ElementInputContainer = new ElementInputContainer();
+
+        inputContainer.addSubElement(new ElementSearch());
+        this.addSubElement(inputContainer);
+        this.addSubElement(optionsContainer);
+
         const optionGroupElements: NodeListOf<HTMLOptGroupElement> =
             this.originalElement.querySelectorAll('optgroup');
 
         if (optionGroupElements.length) {
             optionGroupElements.forEach((el: HTMLOptGroupElement): void => {
-                this.addSubElement(new ElementOptionGroup(el));
+                optionsContainer.addSubElement(new ElementOptionGroup(el));
             });
 
             return;
@@ -49,7 +50,7 @@ class ElementSelect extends JSelectElement
 
         if (options.length) {
             options.forEach((option: HTMLOptionElement): void => {
-                this.addSubElement(new ElementOption(option));
+                optionsContainer.addSubElement(new ElementOption(option));
             });
         }
     }
