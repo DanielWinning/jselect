@@ -7,6 +7,10 @@ abstract class JSelectElement
     constructor(element: HTMLElement = null) {
         this.originalElement = element;
         this.jselectElement = this.buildElement();
+
+        if (this.buildSubElements instanceof Function) {
+            this.buildSubElements();
+        }
     }
 
     /**
@@ -36,15 +40,14 @@ abstract class JSelectElement
     }
 
     /**
+     * @param {JSelectElement} subElement
+     *
      * @returns {void}
      */
-    protected prepareForRender(): void
+    protected addSubElement(subElement: JSelectElement): void
     {
-        if (this.subElements.length) {
-            this.subElements.forEach((subElement: JSelectElement): void => {
-                this.jselectElement.append(subElement.getDOMElement());
-            });
-        }
+        this.subElements.push(subElement);
+        this.jselectElement.append(subElement.getDOMElement());
     }
 
     /**
@@ -55,8 +58,6 @@ abstract class JSelectElement
      */
     public render(element: HTMLElement, where: InsertPosition = 'beforebegin'): void
     {
-        this.prepareForRender();
-
         element.insertAdjacentElement(where, this.jselectElement);
     }
 

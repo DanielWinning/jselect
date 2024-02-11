@@ -16,8 +16,6 @@ class ElementSelect extends JSelectElement
         jselectSelectElement.classList.add('jselect-container');
         jselectSelectElement.dataset.jselectName = (this.originalElement as HTMLSelectElement).name;
 
-        this.buildSubElements();
-
         return jselectSelectElement;
     }
 
@@ -31,7 +29,7 @@ class ElementSelect extends JSelectElement
 
         if (optionGroupElements.length) {
             optionGroupElements.forEach((el: HTMLOptGroupElement): void => {
-                this.subElements.push(new ElementOptionGroup(el));
+                this.addSubElement(new ElementOptionGroup(el));
             });
 
             return;
@@ -42,7 +40,7 @@ class ElementSelect extends JSelectElement
 
         if (options.length) {
             options.forEach((option: HTMLOptionElement): void => {
-                this.subElements.push(new ElementOption(option));
+                this.addSubElement(new ElementOption(option));
             });
         }
     }

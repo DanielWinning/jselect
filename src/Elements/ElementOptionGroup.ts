@@ -14,8 +14,6 @@ class ElementOptionGroup extends JSelectElement
 
         jselectOptionGroupElement.classList.add('jselect-optgroup');
 
-        this.buildSubElements();
-
         return jselectOptionGroupElement;
     }
 
@@ -27,7 +25,7 @@ class ElementOptionGroup extends JSelectElement
         const options: NodeListOf<HTMLOptionElement> = this.originalElement.querySelectorAll('option');
 
         options.forEach((option: HTMLOptionElement): void => {
-            this.subElements.push(new ElementOption(option));
+            this.addSubElement(new ElementOption(option));
         });
     }
 }
