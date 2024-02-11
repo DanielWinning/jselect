@@ -28,4 +28,22 @@ describe('Class: JSelect', () => {
             new JSelect(element);
         }).toThrow(new Error('JSelect can only be instantiated on a HTML select element.'));
     });
+
+    it('should instantiate for all elements on page', (): void => {
+        const select: HTMLSelectElement = document.createElement('select');
+
+        select.classList.add('jselect');
+
+        const selects: Array<HTMLSelectElement> = [
+            select,
+        ];
+
+        selects.forEach((el: HTMLSelectElement): void => {
+            document.body.append(el);
+        });
+
+        expect((): void => {
+            JSelect.loadAllWithDefaultOptions();
+        }).not.toThrow();
+    });
 });
