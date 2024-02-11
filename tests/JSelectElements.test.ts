@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-import { JSelectElement } from '../src/Elements/JSelectElement';
 import { ElementOption } from '../src/Elements/ElementOption';
 import { ElementOptionGroup } from '../src/Elements/ElementOptionGroup';
+import {ElementSelect} from "../src/Elements/ElementSelect";
 
 interface JSelectTestOption {
     group: number;
@@ -64,12 +64,13 @@ afterEach((): void => {
 describe('Classes extending: JSelectElement', (): void => {
     it('should instantiate', (): void => {
         expect((): void => {
+            new ElementSelect(document.querySelector('select'));
             new ElementOption(getAllOptions()[0]);
             new ElementOptionGroup(getAllOptionGroups()[0]);
         }).not.toThrow();
     });
 
-    it('should throw an error when instantiated on the wrong element type', (): void => {
+    it('should throw an error when instantiated with the wrong element type', (): void => {
         expect((): void => {
             new ElementOption();
         }).toThrow(new Error('Invalid element type. Expected HTMLOptionElement, none provided.'));

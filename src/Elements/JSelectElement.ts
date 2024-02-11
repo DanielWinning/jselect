@@ -2,6 +2,7 @@ abstract class JSelectElement
 {
     protected originalElement: HTMLElement|null = null;
     protected jselectElement: HTMLDivElement;
+    protected subElements: Array<JSelectElement> = [];
 
     constructor(element: HTMLElement = null) {
         this.originalElement = element;
@@ -12,6 +13,11 @@ abstract class JSelectElement
      * @returns {void}
      */
     protected abstract buildElement(): HTMLDivElement;
+
+    /**
+     * @returns {void}
+     */
+    protected buildSubElements?(): void;
 
     /**
      * @param {Function} element
