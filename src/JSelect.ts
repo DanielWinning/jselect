@@ -26,6 +26,8 @@ class JSelect {
     {
         const selectContainer: HTMLDivElement = document.createElement('div');
 
+        selectContainer.classList.add('jselect-container');
+
         this.selectionOptions.forEach((selectionOption: HTMLOptionElement) => {
             const selection: HTMLDivElement = document.createElement('div');
 
