@@ -31,6 +31,11 @@ abstract class JSelectElement
     }
 
     /**
+     * Throws an error if the HTMLElement provided to the constructor is not of the correct type. Only needed when
+     * the JSelectElement is provided an originalElement, otherwise does not need to be called.
+     *
+     * @todo Refactor this so that it is called automatically in the base class constructor when required.
+     *
      * @param {Function} element
      *
      * @returns {void}

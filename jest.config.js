@@ -8,5 +8,5 @@ module.exports = {
         '!src/index.ts',
         '!src/index.d.ts',
     ],
-    coverageReporters: ['json', 'lcov', 'text', 'clover'],
+    coverageReporters: ['json', 'lcov', 'text', 'clover']
 }

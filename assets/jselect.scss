@@ -4,17 +4,36 @@
   border-right: $right solid $colour;
   border-bottom: $bottom solid $colour;
 }
-
 .jselect {
   display: none;
 }
 .jselect-container {
   margin: .75rem 0;
   background-color: #d3d3d3;
+  cursor: pointer;
+}
+.jselect-inputs-container {
+  display: flex;
+  position: relative;
 }
 .jselect-search-input {
   width: 100%;
   padding: .25rem .7rem;
+  border: none;
+}
+.jselect-search-dropdown-arrow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  right: 0;
+  max-height: 100%;
+  background-color: #fff;
+}
+.jselect-search-dropdown-arrow-img {
+  width: 32px;
+  height: 32px;
 }
 .jselect-optgroup {
 

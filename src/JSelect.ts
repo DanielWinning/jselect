@@ -11,7 +11,9 @@ class JSelect {
     private settings: IJSelectOptions;
 
     constructor(element: HTMLElement, settings: IJSelectOptions = JSelectConfig.getDefaultOptions()) {
-        if (element.constructor.name !== this.HTML_SELECT_CLASS) throw new Error('JSelect can only be instantiated on a HTML select element.');
+        if (!(element instanceof HTMLSelectElement)) {
+            throw new Error('JSelect can only be instantiated on a HTML select element.');
+        }
 
         this.setOriginalSelectData(<HTMLSelectElement> element);
         this.settings = JSelectConfig.getAllOptions(settings);

@@ -5,7 +5,7 @@
   "main": "dist/jselect.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "webpack --config webpack.config.js --mode=production && cp ./src/index.d.ts ./dist/index.d.ts",
+    "build": "webpack --config webpack.config.js --mode=production && cp ./src/index.d.ts ./dist/index.d.ts && node ./dev/resolve.js",
     "test": "jest --verbose && npx badger --jest ./coverage/coverage-final.json"
   },
   "author": "Daniel Winning",

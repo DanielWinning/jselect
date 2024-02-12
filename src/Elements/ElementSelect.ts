@@ -1,9 +1,10 @@
-import { JSelectElement } from './JSelectElement';
+import { ElementInputContainer } from './ElementInputContainer';
 import { ElementOptionGroup } from './ElementOptionGroup';
 import { ElementOption } from './ElementOption';
 import { ElementSearch } from './ElementSearch';
 import { ElementOptionsContainer } from './ElementOptionsContainer';
-import {ElementInputContainer} from "./ElementInputContainer";
+import { JSelectElement } from './JSelectElement';
+import { ElementSearchDropdownArrow } from './ElementSearchDropdownArrow';
 
 class ElementSelect extends JSelectElement
 {
@@ -31,6 +32,7 @@ class ElementSelect extends JSelectElement
             inputContainer: ElementInputContainer = new ElementInputContainer();
 
         inputContainer.addSubElement(new ElementSearch());
+        inputContainer.addSubElement(new ElementSearchDropdownArrow());
         this.addSubElement(inputContainer);
         this.addSubElement(optionsContainer);
 

@@ -34,9 +34,11 @@ const testRender = (withOptGroup: boolean = false) => {
     const jselectOptionGroup: HTMLElement = document.querySelector('.jselect-optgroup');
     const jselectOption: HTMLElement = document.querySelector('.jselect-option');
     const jselectSearch: HTMLElement = document.querySelector('.jselect-search-input');
+    const jselectSearchDropdown: HTMLSpanElement = document.querySelector('.jselect-search-dropdown-arrow');
 
     expect(jselectContainer).toBeTruthy();
     expect(jselectSearch).toBeTruthy();
+    expect(jselectSearchDropdown).toBeTruthy();
 
     if (withOptGroup) {
         expect(jselectOptionGroup).toBeTruthy();
@@ -54,7 +56,7 @@ afterEach((): void => {
 });
 
 describe('Class: JSelect', (): void => {
-    it('should create an instance of JSelect', (): void => {
+    it('Should create an instance of JSelect', (): void => {
         const element: HTMLSelectElement = createSelectHTMLElement();
 
         for (let i: number = 0; i < 5; i++) {
@@ -71,7 +73,7 @@ describe('Class: JSelect', (): void => {
         expect(jSelect).toBeInstanceOf(JSelect);
     });
 
-    it('should throw error when instantiated with incorrect element type', (): void => {
+    it('Should throw error when instantiated with incorrect element type', (): void => {
         expect((): void => {
             const element: HTMLDivElement = document.createElement('div');
 
@@ -79,7 +81,7 @@ describe('Class: JSelect', (): void => {
         }).toThrow(new Error('JSelect can only be instantiated on a HTML select element.'));
     });
 
-    it('should instantiate for all elements on page', (): void => {
+    it('Should instantiate for all elements on page', (): void => {
         for (let i: number = 0; i < 5; i++) {
             let select: HTMLSelectElement = createSelectHTMLElement();
             select.classList.add('jselect');
@@ -91,7 +93,7 @@ describe('Class: JSelect', (): void => {
         }).not.toThrow();
     });
 
-    it('should instantiate when provided empty options', (): void => {
+    it('Should instantiate when provided empty options', (): void => {
         const select: HTMLSelectElement = createSelectHTMLElement();
 
         expect((): void => {
@@ -99,12 +101,12 @@ describe('Class: JSelect', (): void => {
        }).not.toThrow();
     });
 
-    it('renders: default, no option groups', (): void => {
+    it('Renders: default, no option groups', (): void => {
         buildForRender();
         testRender();
     });
 
-    it('renders: select containing option groups', (): void => {
+    it('Renders: select containing option groups', (): void => {
         buildForRender(true);
         testRender(true);
     });

@@ -12,7 +12,7 @@ class JSelectBuilder
         const selectElements: NodeListOf<HTMLElement> = document.querySelectorAll(JSelectBuilder.defaultIdentifier);
 
         selectElements.forEach((el: HTMLElement): void => {
-            if (el.constructor.name === 'HTMLSelectElement') new JSelect(el);
+            if (el instanceof HTMLSelectElement) new JSelect(el);
         });
     }
 }
