@@ -4,10 +4,9 @@
 import { ElementOption } from '../src/Elements/ElementOption';
 import { ElementOptionGroup } from '../src/Elements/ElementOptionGroup';
 import { ElementSelect } from '../src/Elements/ElementSelect';
-import {ElementSearch} from "../src/Elements/ElementSearch";
-import {ElementInputContainer} from "../src/Elements/ElementInputContainer";
-import {render} from "sass";
+import { ElementInputContainer } from '../src/Elements/ElementInputContainer';
 import {ElementOptionsContainer} from "../src/Elements/ElementOptionsContainer";
+import {JSelectElement} from "../src/Elements/JSelectElement";
 
 interface JSelectTestOption {
     group: number;
@@ -43,10 +42,15 @@ const setupElements = (): void => {
         },
     ];
 
-    optionElements.forEach((option: JSelectTestOption): void => {
+    optionElements.forEach((option: JSelectTestOption, index: number): void => {
+        let i: number = index + 1;
+        option.element.value = i.toString();
+        option.element.innerHTML = `Option ${i}`;
         optionGroupElements[option.group].append(option.element);
     });
-    optionGroupElements.forEach((el: HTMLOptGroupElement): void => {
+    optionGroupElements.forEach((el: HTMLOptGroupElement, index: number): void => {
+        let i: number = index + 1;
+        el.label = `Group ${i}`;
         selectElement.append(el);
     });
 
@@ -66,7 +70,7 @@ afterEach((): void => {
 });
 
 describe('Classes extending: JSelectElement', (): void => {
-    it('should instantiate', (): void => {
+    it('Should instantiate', (): void => {
         expect((): void => {
             new ElementSelect(document.querySelector('select'));
             new ElementOption(getAllOptions()[0]);
@@ -74,7 +78,7 @@ describe('Classes extending: JSelectElement', (): void => {
         }).not.toThrow();
     });
 
-    it('should throw an error when instantiated with the wrong element type', (): void => {
+    it('Should throw an error when instantiated with the wrong element type', (): void => {
         expect((): void => {
             new ElementOption();
         }).toThrow(new Error('Invalid element type. Expected HTMLOptionElement, none provided.'));
@@ -84,21 +88,23 @@ describe('Classes extending: JSelectElement', (): void => {
         }).toThrow(new Error('Invalid element type. Expected HTMLOptionElement, got HTMLSelectElement.'))
     });
 
-    it('Should get sub element', () => {
-        const selectElement: HTMLSelectElement = document.createElement('select');
-        const optGroupElement: HTMLOptGroupElement = document.createElement('optgroup');
-        const optionElement: HTMLOptionElement = document.createElement('option');
-
-        optionElement.value = '1';
-        optionElement.innerHTML = 'Option One';
-        optGroupElement.label = 'Group One';
-        optGroupElement.append(optionElement);
-        selectElement.append(optionElement);
-
+    it('Should get sub element', (): void => {
+        const selectElement: HTMLSelectElement = document.querySelector('select');
         const elementSelect: ElementSelect = new ElementSelect(selectElement);
 
         expect(elementSelect).toBeTruthy();
+
+        const elementOptionsContainer: JSelectElement = elementSelect.getSubElement(ElementOptionsContainer);
+
         expect(elementSelect.getSubElement(ElementOptionsContainer)).toBeTruthy();
+
+        const elementOptGroup: JSelectElement = elementOptionsContainer.getSubElement(ElementOptionGroup, 1);
+
+        expect(elementOptGroup).toBeTruthy();
+
+        const elementOptGroupDOMElement: HTMLElement = elementOptGroup.getDOMElement();
+
+        expect(elementOptGroupDOMElement.querySelector('span.jselect-optgroup-label').innerHTML).toBe('Group 2');
     });
 
     it('Should toggle display', (): void => {

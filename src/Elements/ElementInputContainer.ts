@@ -9,8 +9,8 @@ class ElementInputContainer extends JSelectElement
     }
 
     protected addEventHandlers() {
-        this.jselectElement.addEventListener('click', () => {
-            this.getSubElement(ElementOptionsContainer).toggle();
+        this.jselectElement.addEventListener('click', (): void => {
+            this.parent.getSubElement(ElementOptionsContainer).toggle();
         });
     }
 }

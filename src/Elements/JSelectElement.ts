@@ -3,6 +3,7 @@ abstract class JSelectElement
     protected originalElement: HTMLElement|null = null;
     protected jselectElement: HTMLElement;
     protected subElements: Array<JSelectElement> = [];
+    protected parent: JSelectElement = null;
 
     constructor(element: HTMLElement = null) {
         this.originalElement = element;
@@ -27,6 +28,12 @@ abstract class JSelectElement
      */
     protected buildSubElements?(): void;
 
+    /**
+     * @param {string} elementTag
+     * @param {Array<string>}cssClasses
+     *
+     * @returns {HTMLElement}
+     */
     protected makeElement(elementTag: string, cssClasses: Array<string>): HTMLElement
     {
         const element: HTMLElement = document.createElement(elementTag);
@@ -36,16 +43,24 @@ abstract class JSelectElement
         return element;
     }
 
+    /**
+     * Uses zero indexing.
+     *
+     * @param {Function} subElementType
+     * @param {number} index
+     *
+     * @returns {JSelectElement|null}
+     */
     public getSubElement(subElementType: Function, index: number = 0): JSelectElement|null
     {
-        let find: number = 0;
         let element: JSelectElement = null;
+        let timesFound: number = 0;
 
         this.subElements.forEach((subElement: JSelectElement) => {
             if (subElement.constructor.name !== subElementType.name) return;
 
-            if (index) {
-                ++find;
+            if (timesFound !== index) {
+                timesFound++;
                 return;
             }
 
@@ -77,11 +92,27 @@ abstract class JSelectElement
     }
 
     /**
+     * @param {JSelectElement} parent
+     *
+     * @returns {void}
+     */
+    public setParent(parent: JSelectElement): void
+    {
+        this.parent = parent;
+    }
+
+    /**
      * @returns {void}
      */
     public toggle(): void
     {
         this.jselectElement.classList.toggle('jselect-hidden');
+    }
+
+    public hide(): void
+    {
+        if (!this.jselectElement.classList.contains('jselect-hidden'))
+            this.jselectElement.classList.add('jselect-hidden');
     }
 
     /**
@@ -93,6 +124,7 @@ abstract class JSelectElement
     {
         this.subElements.push(subElement);
         this.jselectElement.append(subElement.getDOMElement());
+        subElement.setParent(this);
     }
 
     /**

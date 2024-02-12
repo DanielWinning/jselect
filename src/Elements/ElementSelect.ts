@@ -56,6 +56,13 @@ class ElementSelect extends JSelectElement
             });
         }
     }
+
+    protected addEventHandlers(): void
+    {
+        this.jselectElement.addEventListener('focusout', () => {
+            this.getSubElement(ElementOptionsContainer).hide();
+        });
+    }
 }
 
 export { ElementSelect };
