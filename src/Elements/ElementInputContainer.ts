@@ -1,10 +1,17 @@
 import { JSelectElement } from './JSelectElement';
+import { ElementOptionsContainer } from './ElementOptionsContainer';
 
 class ElementInputContainer extends JSelectElement
 {
-    protected buildElement(): HTMLElement
+    protected buildElement(): HTMLDivElement
     {
-        return this.makeElement('div', 'jselect-inputs-container');
+        return <HTMLDivElement> this.makeElement('div', ['jselect-inputs-container']);
+    }
+
+    protected addEventHandlers() {
+        this.jselectElement.addEventListener('click', () => {
+            this.getSubElement(ElementOptionsContainer).toggle();
+        });
     }
 }
 

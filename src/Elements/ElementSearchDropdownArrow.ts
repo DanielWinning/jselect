@@ -5,7 +5,7 @@ class ElementSearchDropdownArrow extends JSelectElement
     protected buildElement(): HTMLElement
     {
         const jselectSearchDropdownContainer: HTMLSpanElement =
-            <HTMLSpanElement> this.makeElement('span', 'jselect-search-dropdown-arrow');
+            <HTMLSpanElement> this.makeElement('span', ['jselect-search-dropdown-arrow']);
         const jselectSearchDropdownImage: HTMLImageElement = new Image();
 
         jselectSearchDropdownImage.src = 'DropdownArrow.svg';

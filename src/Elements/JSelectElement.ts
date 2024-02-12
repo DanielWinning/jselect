@@ -9,6 +9,7 @@ abstract class JSelectElement
         this.jselectElement = this.buildElement();
 
         if (this.buildSubElements instanceof Function) this.buildSubElements();
+        if (this.addEventHandlers instanceof Function) this.addEventHandlers();
     }
 
     /**
@@ -19,13 +20,37 @@ abstract class JSelectElement
     /**
      * @returns {void}
      */
+    protected addEventHandlers?(): void;
+
+    /**
+     * @returns {void}
+     */
     protected buildSubElements?(): void;
 
-    protected makeElement(elementTag: string, cssClasses: string): HTMLElement
+    protected makeElement(elementTag: string, cssClasses: Array<string>): HTMLElement
     {
         const element: HTMLElement = document.createElement(elementTag);
 
-        element.classList.add(cssClasses);
+        element.classList.add(...cssClasses);
+
+        return element;
+    }
+
+    public getSubElement(subElementType: Function, index: number = 0): JSelectElement|null
+    {
+        let find: number = 0;
+        let element: JSelectElement = null;
+
+        this.subElements.forEach((subElement: JSelectElement) => {
+            if (subElement.constructor.name !== subElementType.name) return;
+
+            if (index) {
+                ++find;
+                return;
+            }
+
+            element = subElement;
+        });
 
         return element;
     }
@@ -49,6 +74,14 @@ abstract class JSelectElement
         if (this.originalElement.constructor.name !== element.name) {
             throw new Error(`Invalid element type. Expected ${element.name}, got ${this.originalElement.constructor.name}.`);
         }
+    }
+
+    /**
+     * @returns {void}
+     */
+    public toggle(): void
+    {
+        this.jselectElement.classList.toggle('jselect-hidden');
     }
 
     /**

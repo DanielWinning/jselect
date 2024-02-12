@@ -15,9 +15,9 @@ class ElementSelect extends JSelectElement
     {
         this.checkElementType(HTMLSelectElement);
 
-        const jselectSelectElement: HTMLDivElement = document.createElement('div');
+        const jselectSelectElement: HTMLDivElement =
+            <HTMLDivElement> this.makeElement('div', ['jselect-container']);
 
-        jselectSelectElement.classList.add('jselect-container');
         jselectSelectElement.dataset.jselectName = (this.originalElement as HTMLSelectElement).name;
 
         return jselectSelectElement;

@@ -4,11 +4,7 @@ class ElementOptionsContainer extends JSelectElement
 {
     protected buildElement(): HTMLDivElement
     {
-        const jselectOptionsElement: HTMLDivElement = document.createElement('div');
-
-        jselectOptionsElement.classList.add('jselect-options-container');
-
-        return jselectOptionsElement;
+        return <HTMLDivElement> this.makeElement('div', ['jselect-options-container', 'jselect-hidden']);
     }
 }
 
